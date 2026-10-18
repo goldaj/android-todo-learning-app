@@ -1,4 +1,4 @@
-# Première application Android : liste de tâches
+# Android To-do — application Java pédagogique
 
 Application pédagogique Android écrite en Java. Elle permet d'ajouter une tâche, de la marquer comme faite ou à faire et de la supprimer. Les tâches et leur état sont conservés localement avec SQLite.
 
