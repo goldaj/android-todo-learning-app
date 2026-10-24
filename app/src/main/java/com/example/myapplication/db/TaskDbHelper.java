@@ -24,10 +24,10 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         db.execSQL(createTable);
     }
 
-    // Méthode de suppression d'une base de données
+    // Une migration non implémentée ne doit jamais effacer les tâches existantes.
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TaskContract.TaskEntry.TABLE);
-        onCreate(db);
+        throw new IllegalStateException(
+                "Migration SQLite à définir de v" + oldVersion + " vers v" + newVersion);
     }
 }
