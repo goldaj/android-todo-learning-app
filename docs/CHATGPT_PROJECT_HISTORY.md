@@ -15,3 +15,11 @@ Ouvrir dans Android Studio, compiler par gradlew.bat assembleDebug ; SDK32 min A
 
 ## Limites et maintenance
 Les transcriptions exactes des échanges précédents et leurs horaires ne sont pas disponibles ici ; aucune réponse de l'assistant n'a été inventée. Lorsque le propriétaire fournit des exports authentiques, conserver la distinction rôle/date/texte et vérifier les informations sensibles avant commit. Ajouter les nouveaux échanges sourcés en fin de document, sans réécrire le passé.
+
+## 2026-10-24 — Corrections fonctionnelles sur une branche parallèle
+
+**Utilisateur (résumé reconstruit, non verbatim, heure inconnue)** : demande de privilégier la correction des bugs et la poursuite des fonctionnalités incomplètes plutôt que la structure des dépôts.
+
+**Assistant (résumé reconstruit, non verbatim)** : les lignes conservent désormais leur ID SQLite, les actions « terminée », « à faire » et « supprimer » utilisent cet ID, de sorte que deux tâches au titre identique restent indépendantes. Une mise à jour de base sans stratégie de migration explicite échoue plutôt que de détruire les tâches. Branche `chatgpt/review-20261024` seulement.
+
+**Validation** : compilation Android soumise à GitHub Actions sur la PR ; aucun test manuel sur téléphone et aucune modification de la branche principale.

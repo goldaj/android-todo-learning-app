@@ -5,14 +5,20 @@ package com.example.myapplication.domain;
  */
 public class Task {
     // Une tâche possède un titre décrivant la tâche
+    long id;
     String title;
     // Une tâche possède un état ("fait" ou "à faire")
     TaskState state;
 
     // Méthode permettant de créer une tâche
-    public Task(String title, TaskState state) {
+    public Task(long id, String title, TaskState state) {
+        this.id = id;
         this.title = title;
         this.state = state;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public void setTitle(String title) {
