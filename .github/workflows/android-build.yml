@@ -18,8 +18,8 @@ jobs:
           java-version: '17'
       - name: Install Android SDK 32 with preinstalled commandline-tools
         run: |
-          yes | sdkmanager --licenses >/dev/null || true
-          sdkmanager --install 'platforms;android-32' 'build-tools;32.0.0'
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install 'platforms;android-32' 'build-tools;32.0.0'
       - name: Build Debug APK without signing key
         run: |
           chmod +x gradlew
