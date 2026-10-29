@@ -21,3 +21,7 @@ Les transcriptions exactes des échanges précédents et leurs horaires ne sont 
 Utilisateur (verbatim, heure précise indisponible) : « Je ne te demande pas de créer une tâche planifiée qui continue chaque jour. Je te demande de continuer maintenant en boucle et de ne pas t'arrêter sur juste 3 améliorations alors qu'il y a plus de 40 repo et plusieurs améliorations possibles par repo ».
 
 Assistant (résumé non verbatim) : évolution de l'app Android native sans migration destructive, recherche/filtre/édition/suppression confirmée ; correction des mutations sur titre ambigu en ciblage SQLite `_ID`. Ajout de règles pures testables en JDK et doc dans `docs/TASK_MANAGEMENT_V2.md`. Le build et les essais appareil restent à confirmer.
+
+### Confirmation de compilation Android (2026-10-29)
+
+L'exécution `:app:assembleDebug` sur Ubuntu/SDK32, après correction de `ListView.setEmptyView` et des prérequis JDK17/SDK, a **réussi** : https://github.com/goldaj/android-todo-learning-app/actions/runs/40853641095 . Le workflow est ensuite enrichi pour conserver un APK Debug en artefact de test. Aucun essai tactile réel encore réalisé.

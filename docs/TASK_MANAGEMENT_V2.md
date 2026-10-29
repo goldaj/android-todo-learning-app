@@ -23,3 +23,7 @@ La CI ajoute des tests Java purs du moteur `TaskRules`. **Elle ne construit pas 
 - Ajouter export/import local JSON et une sauvegarde avant migrations.
 - Revoir les chaînes de texte, descriptions d'accessibilité et styles sur écrans compacts.
 - Mettre à niveau Gradle/SDK/targetSdk prudemment, en validant un build et le cycle de vie Android.
+
+## Validation de build et essai réel
+
+Après correction de la configuration du SDK et de l'attribut XML invalide, **Gradle assembleDebug réussit sur GitHub Actions** : https://github.com/goldaj/android-todo-learning-app/actions/runs/40853641095 . Les tests Java purs réussissent séparément. La CI conserve dorénavant l'APK `app-debug.apk` sous le nom `android-todo-debug-apk` pendant sept jours. Pour tester : ouvrir l'exécution GitHub Actions réussie, télécharger l'artefact et installer l'APK sur un appareil Android de test (installation d'APK externe autorisée par l'utilisateur). Cela n'est pas une validation de navigation tactile réelle ; elle demeure nécessaire.
