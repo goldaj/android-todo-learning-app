@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         helper = new TaskDbHelper(this);
         listView = findViewById(R.id.list_todo);
+        listView.setEmptyView(findViewById(R.id.task_empty));
         search = findViewById(R.id.task_search);
         summary = findViewById(R.id.task_summary);
         if (state != null) {
