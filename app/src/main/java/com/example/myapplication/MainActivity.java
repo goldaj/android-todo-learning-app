@@ -92,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
         db.close();
     }
 
+    private long taskIdFromRowButton(View button) {
+        View row = (View) button.getParent();
+        Object stored = row.getTag();
+        return stored instanceof Number ? ((Number) stored).longValue() : -1L;
+    }
+
     // Méthode qui se lance lorsqu'on utilise le bouton indiquant qu'une tâche est faite.
     public void doneTask(View view) {
         View parent = (View) view.getParent();
@@ -106,10 +112,8 @@ public class MainActivity extends AppCompatActivity {
         Button undoButton = parent.findViewById(R.id.task_undo);
         undoButton.setVisibility(View.VISIBLE);
 
-        String taskName = String.valueOf(task.getText());
-
-        // On enregistre en base de données. Sinon en redémarrant l'application on perdrait le statut de toutes nos tâches.
-        updateInDataBase(taskName, TaskState.DONE);
+        long id = taskIdFromRowButton(view);
+        if (id >= 0) updateInDataBase(id, TaskState.DONE);
     }
 
     // Méthode qui se lance lorsqu'on utilise le bouton indiquant qu'une tâche est à faire.
@@ -126,44 +130,41 @@ public class MainActivity extends AppCompatActivity {
         Button doneButton = parent.findViewById(R.id.task_done);
         doneButton.setVisibility(View.VISIBLE);
 
-        String taskName = String.valueOf(task.getText());
-
-        // On enregistre en base de données. Sinon en redémarrant l'application on perdrait le statut de toutes nos tâches.
-        updateInDataBase(taskName, TaskState.TODO);
+        long id = taskIdFromRowButton(view);
+        if (id >= 0) updateInDataBase(id, TaskState.TODO);
     }
 
     // Méthode qui se lance lorsqu'on supprimer une tâche
     public void deleteTask(View view) {
         // On supprime la tâche de l'affichage du téléphone
         View parent = (View) view.getParent();
-        TextView taskTextView = parent.findViewById(R.id.task_title);
-        String task = String.valueOf(taskTextView.getText());
+        long taskId = taskIdFromRowButton(view);
+        if (taskId < 0) return;
 
         /* On supprime la tâche de la base de données.
            Sinon en redémarrant le téléphone on afficherait à nouveau les tâches qu'on avait supprimé.
         */
         SQLiteDatabase db = mHelper.getWritableDatabase();
         db.delete(TaskContract.TaskEntry.TABLE,
-                TaskContract.TaskEntry.COL_TASK_TITLE + " = ?",
-                new String[]{task});
+                TaskContract.TaskEntry._ID + " = ?",
+                new String[]{String.valueOf(taskId)});
         db.close();
         updateUI();
     }
 
     // Méthode générique qui sert à plusieurs endroits pour mettre à jour la base de données et enregistrer les informations
-    private void updateInDataBase(String title, TaskState state) {
+    private void updateInDataBase(long taskId, TaskState state) {
         ContentValues values = new ContentValues();
         // Rajout du nom de la tâche avec la valeur sélectionnée par l'utilisateur
-        values.put(TaskContract.TaskEntry.COL_TASK_TITLE, title);
-        // On créé/modifie la tâche avec l'état actuel de la tâche
+        // Modifie seulement l'état : le titre reste celui qui appartient à cet ID.
         values.put(TaskContract.TaskEntry.COL_TASK_STATE, String.valueOf(state));
 
         // Enregistrement en base de données
         SQLiteDatabase db = mHelper.getWritableDatabase();
         db.updateWithOnConflict(TaskContract.TaskEntry.TABLE,
                 values,
-                TaskContract.TaskEntry.COL_TASK_TITLE + "= ?" ,
-                new String[]{title},
+                TaskContract.TaskEntry._ID + "= ?" ,
+                new String[]{String.valueOf(taskId)},
                 SQLiteDatabase.CONFLICT_IGNORE);
         db.close();
     }
@@ -183,7 +184,9 @@ public class MainActivity extends AppCompatActivity {
         while (cursor.moveToNext()) {
             int idx = cursor.getColumnIndex(TaskContract.TaskEntry.COL_TASK_TITLE);
             int state = cursor.getColumnIndex(TaskContract.TaskEntry.COL_TASK_STATE);
-            taskList.add(new Task(cursor.getString(idx), TaskState.valueOf(cursor.getString(state))));
+            int idIndex = cursor.getColumnIndexOrThrow(TaskContract.TaskEntry._ID);
+            taskList.add(new Task(cursor.getLong(idIndex), cursor.getString(idx),
+                    TaskState.valueOf(cursor.getString(state))));
         }
 
         // Création de l'affichage à l'écran du téléphone

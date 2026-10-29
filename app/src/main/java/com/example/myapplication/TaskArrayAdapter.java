@@ -40,6 +40,8 @@ public class TaskArrayAdapter extends ArrayAdapter<Task> {
         // Dans la base de données on aura une liste de tâches.
         // On indique ici qu'on va executer les opérations sur chaque tâches trouvée
         Task currentTask = getItem(position);
+        // A row may be recycled by ListView: always rebind its task ID.
+        currentItemView.setTag(currentTask.getId());
 
         // Association du titre de la tâche dans la base de données avec celui de l'écran
         TextView title = currentItemView.findViewById(R.id.task_title);
