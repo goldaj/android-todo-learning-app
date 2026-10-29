@@ -15,3 +15,9 @@ Ouvrir dans Android Studio, compiler par gradlew.bat assembleDebug ; SDK32 min A
 
 ## Limites et maintenance
 Les transcriptions exactes des échanges précédents et leurs horaires ne sont pas disponibles ici ; aucune réponse de l'assistant n'a été inventée. Lorsque le propriétaire fournit des exports authentiques, conserver la distinction rôle/date/texte et vérifier les informations sensibles avant commit. Ajouter les nouveaux échanges sourcés en fin de document, sans réécrire le passé.
+
+## 2026-10-29 : ergonomie et identité des tâches
+
+Utilisateur (verbatim, heure précise indisponible) : « Je ne te demande pas de créer une tâche planifiée qui continue chaque jour. Je te demande de continuer maintenant en boucle et de ne pas t'arrêter sur juste 3 améliorations alors qu'il y a plus de 40 repo et plusieurs améliorations possibles par repo ».
+
+Assistant (résumé non verbatim) : évolution de l'app Android native sans migration destructive, recherche/filtre/édition/suppression confirmée ; correction des mutations sur titre ambigu en ciblage SQLite `_ID`. Ajout de règles pures testables en JDK et doc dans `docs/TASK_MANAGEMENT_V2.md`. Le build et les essais appareil restent à confirmer.

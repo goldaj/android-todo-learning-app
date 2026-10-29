@@ -1,10 +1,21 @@
-<!-- Ce fichier correspond aux différents textes affichés dans l'application.
-  Si on souhaite modifier un des textes affiché c'est ici que ça se passe. -->
 <resources>
-    <string name="app_name">Todo list</string>
-    <string name="task_title">default_task_title</string>
+    <string name="app_name">Liste de tâches</string>
+    <string name="task_title">Ma tâche</string>
     <string name="done">Fait</string>
     <string name="undo">À faire</string>
     <string name="delete">Supprimer</string>
+    <string name="delete_short">Suppr.</string>
+    <string name="edit_short">Éditer</string>
     <string name="add_task">Ajouter une tâche</string>
+    <string name="edit_task">Modifier la tâche</string>
+    <string name="save">Enregistrer</string>
+    <string name="confirm_delete">Supprimer cette tâche ?</string>
+    <string name="task_missing">Cette tâche n’existe plus.</string>
+    <string name="search_tasks">Rechercher une tâche</string>
+    <string name="filter_all">Tout</string>
+    <string name="filter_todo">À faire</string>
+    <string name="filter_done">Faites</string>
+    <string name="task_summary_initial">Aucune tâche</string>
+    <string name="task_summary_format">%1$d à faire • %2$d faites • %3$d affichées</string>
+    <string name="no_tasks">Aucune tâche ne correspond à la recherche.</string>
 </resources>
