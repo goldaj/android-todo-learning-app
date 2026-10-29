@@ -1,39 +1,20 @@
 package com.example.myapplication.domain;
 
-/*
- Définition de ce qu'est une "tâche" à réaliser
- */
-public class Task {
-    // Une tâche possède un titre décrivant la tâche
-    long id;
-    String title;
-    // Une tâche possède un état ("fait" ou "à faire")
-    TaskState state;
+public final class Task {
+    private final long id;
+    private final String title;
+    private final TaskState state;
 
-    // Méthode permettant de créer une tâche
     public Task(long id, String title, TaskState state) {
         this.id = id;
         this.title = title;
         this.state = state;
     }
 
-    public long getId() {
-        return id;
-    }
+    // Kept for compatibility with historical examples.
+    public Task(String title, TaskState state) { this(-1, title, state); }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setState(TaskState state) {
-        this.state = state;
-    }
-
-    public TaskState getState() {
-        return state;
-    }
+    public long getId() { return id; }
+    public String getTitle() { return title; }
+    public TaskState getState() { return state; }
 }

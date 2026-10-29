@@ -23,3 +23,9 @@ La compilation et l'exécution sur un appareil restent à vérifier avec un envi
 - `app/src/main/res/` : interface XML et ressources.
 
 `local.properties`, les clés de signature, les paramètres IDE et les fichiers de construction restent locaux et sont ignorés par Git.
+
+## Nouvelles capacités (2026-10-29)
+
+Recherche, filtres Tout/À faire/Faites, compteur de tâches, tri par état et récence, modification de titre, confirmation de suppression. Les opérations SQLite ciblent l'identifiant `_ID` et n'affectent plus plusieurs tâches homonymes. Aucune migration de schéma. Lire [docs/TASK_MANAGEMENT_V2.md](docs/TASK_MANAGEMENT_V2.md). Tests du domaine Java via CI ; build Android toujours à valider sur poste.
+
+**APK de test** : la CI GitHub Actions `Android Todo APK build` compile `assembleDebug` et met à disposition `android-todo-debug-apk` en artefact téléchargeable pendant sept jours. Voir `docs/TASK_MANAGEMENT_V2.md` et vérifier que l'exécution de la branche est réussie avant installation. Aucun Play Store ni signature de distribution.

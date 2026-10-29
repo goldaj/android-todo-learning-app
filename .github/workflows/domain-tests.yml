@@ -1,0 +1,22 @@
+name: Android Todo domain rules
+on:
+  push:
+    branches: [main, 'feat/**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pure-java:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Compile and test domain rules without Android SDK
+        run: |
+          mkdir -p /tmp/todo-classes
+          javac -encoding UTF-8 -d /tmp/todo-classes app/src/main/java/com/example/myapplication/domain/*.java tests/TaskRulesTest.java
+          java -cp /tmp/todo-classes TaskRulesTest
